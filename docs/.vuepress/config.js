@@ -14,9 +14,10 @@ module.exports = {
   serviceWorker: true,
   themeConfig: {
     nav: [
-      { text: '指南', link: '/guide/' },
-      { text: '选项', link: '/options/' },
-      { text: 'API', link: '/api/' },
+      { text: 'English', link: '/en/' },
+      { text: 'Guide / 指南', link: './guide/' },
+      { text: 'Options / 选项', link: './options/' },
+      { text: 'API', link: './api/' },
     ],
     sidebar: {
       '/guide/': [
