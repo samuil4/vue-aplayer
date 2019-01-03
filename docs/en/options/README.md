@@ -2,11 +2,12 @@
 sidebar: auto
 ---
 
-# 选项
+# Options
 
 ::: tip Info:
-HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。  
-这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名。如果你使用字符串模板，那么这个限制就不存在了。
+Property names in HTML are case insensitive, so the browser interprets all uppercase characters as lowercase characters. 
+This means that when you use a template in the DOM, the prop name of camelCase (hump nomenclature) needs to be named using its equivalent kebab-case (short-lined naming). 
+If you use a string template, then this restriction does not apply.
 :::
 
 ## fixed <Badge text="Optional" />
@@ -27,33 +28,33 @@ This option controls the player to expand or collapse if the bottom mode is on
 
 ## autoplay <Badge text="Optional" />
 
-::: warning 注意
-由于大多数移动端浏览器禁止了音频自动播放，所以该选项在移动端无效
+::: warning Note:
+This option is not available on the mobile version, because most mobile browsers have audio autoplay disabled by default.
 :::
 
 - **Type**：`boolean?`
 - **Default value**：`false`
-- **Description**：是否开启自动播放
+- **Description**：Enable automatic playbac
 
 ## theme <Badge text="Optional" />
 
 ::: tip Info:
-你可以选择引入 [color-thief](https://cdn.jsdelivr.net/npm/colorthief@2.0.2/dist/) 让播放器根据封面图片自动获取主题颜色
+You can choose to use [color-thief](https://cdn.jsdelivr.net/npm/colorthief@2.0.2/dist/) to let the player automatically get the theme color based on the cover image.
 :::
 
 - **Type**：`string?`
 - **Default value**：`#b7daff`
-- **Description**：设置播放器默认主题颜色
+- **Description**：Set the player default theme color
 
 ## loop <Badge text="Optional" />
 
-::: warning 注意
-由于播放器会保存用户的使用习惯，所以播放器首次初始化之后该选项将失效
+::: warning Note:
+Since the player will save the user's usage habits, this option will be invalid after the player is initialized for the first time.
 :::
 
 - **Type**：`APlayer.LoopMode?`
 - **Default value**：`all`
-- **Description**：设置播放器的初始循环模式
+- **Description**：Set the initial loop mode of the player
 
 ```ts
 declare namespace APlayer {
@@ -63,13 +64,13 @@ declare namespace APlayer {
 
 ## order <Badge text="Optional" />
 
-::: warning 注意
-由于播放器会保存用户的使用习惯，所以播放器首次初始化之后该选项将失效
+::: warning Note:
+Since the player will save the user's usage habits, this option will be invalid after the player is initialized for the first time.
 :::
 
 - **Type**：`APlayer.OrderMode?`
 - **Default value**：`list`
-- **Description**：设置播放器的初始顺序模式
+- **Description**：Set the initial sequence mode of the player
 
 ```ts
 declare namespace APlayer {
@@ -81,7 +82,7 @@ declare namespace APlayer {
 
 - **Type**：`APlayer.Preload?`
 - **Default value**：`auto`
-- **Description**：设置音频的预加载模式
+- **Description**：Set the preload mode of the audio
 
 ```ts
 declare namespace APlayer {
@@ -93,48 +94,48 @@ declare namespace APlayer {
 
 - **Type**：`number?`
 - **Default value**：`0.7`
-- **Description**：设置播放器的音量
+- **Description**：Set the volume of the player
 
-## audio <Badge type="error" text="必填" />
+## audio <Badge type="error" text="Required" />
 
 - **Type**：`APlayer.Audio | Array<APlayer.Audio>`
 - **Default value**：`undefined`
-- **Description**：设置要播放的音频对象或播放列表
+- **Description**：Set the audio object or playlist to play
 
 ```ts
 declare namespace APlayer {
   export type AudioType = 'auto' | 'hls' | 'normal';
   export interface Audio {
-    id?: number; // 音频 id
-    name: string; // 音频名称
-    artist: string; // 音频艺术家
-    url: string; // 音频播放地址
-    cover: string; // 音频封面
-    lrc?: string; // lrc 歌词
-    theme?: string; // 单曲主题色，它将覆盖全局的默认主题色
-    type?: AudioType; // 指定音频的Type
-    speed?: number; // 单曲播放速度
+    id?: number; // Song id
+    name: string; // Song name
+    artist: string; // Artist name
+    url: string; // Audio url
+    cover: string; // Cover image url
+    lrc?: string; // Lirycs url
+    theme?: string; // Single theme color, it will override the global default theme color
+    type?: AudioType; // Specify the type of audio
+    speed?: number; // Playback speed
   }
 }
 ```
 
-这里与 [APlayer](https://github.com/MoePlayer/APlayer) 不同的是新增了 `id` 和 `speed` 属性。  
-`id` 默认情况下由播放器自动生成，你也可以手动传一个 `id` 来覆盖它。  
-`speed` 属性可以指定该音频的播放速度。
+The differences between this [APlayer](https://github.com/MoePlayer/APlayer) and the current implentation are the extra props added  `id` and `speed`.
+`id` By default, generated automatically by the player, but you can also pass `id` value.  
+`speed` The property can specify the playback speed of the audio.
 
-::: warning 注意
-`id` 是用来区分音频的唯一标识，不允许重复，如果出现重复可能会导致播放器出现异常。  
-默认情况下 `id` 是根据播放列表的索引生成，当播放列表发生变化时 (新增/删除) 会重新生成。  
-当你从播放列表中删除音频时，由于播放列表发生了变化，所以会导致当前音频的 `id` 与删除后的播放列表不匹配。
-出现这种情况时，会降级根据 `url` 更新当前音频的信息，如果播放列表中每一项的 `url` 都是唯一的，那么不会有问题。
-如果有重复的 `url`，你必须设置音频的 `id` 属性，以确保每一项都是唯一的，否则播放器可能出现异常。
+::: warning Note:
+`id` is a unique identifier used to distinguish audio. It is not allowed to repeat. If it is repeated, it may cause the player to missbehave.   
+By default, `id` is generated according to the index of the playlist audio files, and regenerates when the playlist change (add / delete).   
+When you delete the audio from a playlist, it will cause the current audio `id` to not match the playlist id after deletion.
+If you are using unique `url` values everithing will be ok.
+If there are duplicate `url` values，you have to set the audio `id` properties to ensure that each item is unique, otherwise the player exception may occur.
 :::
 
 ## customAudioType <Badge text="Optional" />
 
 - **Type**：`{ [index: string]: Function }?`
 - **Default value**：`undefined`
-- **Description**：自定义音频 Type
+- **Description**：Custom audio type
 
 📝 [example.vue](/guide/hls.html)
 
@@ -186,53 +187,54 @@ export default {
 
 - **Type**：`boolean?`
 - **Default value**：`true`
-- **Description**：是否开启互斥模式
+- **Description**：Enable mutual exclusion mode
 
-如果开启则会阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
+If enabled, multiple players will be blocked from playing at the same time, and other players will be paused while the current player is playing.
 
 ## lrcType <Badge text="Optional" />
 
 - **Type**：`APlayer.LrcType?`
 - **Default value**：`0`
-- **Description**：设置 lrc 歌词解析模式
+- **Description**：Set lrc lyrics parsing mode
 
 ```ts
 declare namespace APlayer {
   export enum LrcType {
-    file = 3, // 表示 audio.lrc 的值是 lrc 文件地址，将通过 `fetch` 获取 lrc 歌词文本
-    html = 2, // 不支持 html 用法
-    string = 1, // 表示 audio.lrc 的值是 lrc 格式的字符串，将直接通过它解析歌词
-    disabled = 0, // 禁用 lrc 歌词
+    file = 3, // Indicates that the value of audio.lrc is the lrc file address, and the lrc lyrics text will be obtained by `fetch`
+    html = 2, // HTML support
+    string = 1, // Indicates that the value of audio.lrc is a string in lrc format, which will parse the lyrics directly through it.
+    disabled = 0, // Disable lrc lyrics
   }
 }
 ```
 
 ## listFolded <Badge text="Optional" />
 
-::: warning 注意
-由于播放器会保存用户的使用习惯，所以播放器首次初始化之后该选项将失效
+::: warning Note:
+Since the player will save the user's usage habits, this option will be invalid after the player is initialized for the first time.
 :::
 
 - **Type**：`boolean?`
 - **Default value**：`false`
-- **Description**：是否折叠播放列表
+- **Description**：Fold the playlist
 
 ## listMaxHeight <Badge text="Optional" />
 
 - **Type**：`number?`
 - **Default value**：`250`
-- **Description**：设置播放列表最大高度，单位为像素
+- **Description**：Set the maximum height of the playlist in pixels
 
 ## storageName <Badge text="Optional" />
 
 - **Type**：`string?`
 - **Default value**：`aplayer-setting`
-- **Description**：设置存储播放器设置的 `localStorage` key
+- **Description**：Set the `localStorage` key to store player settings
 
-这里与 [APlayer](https://github.com/MoePlayer/APlayer) 有所不同，在 `localStorage` 中保存的是对象数组  
-不同的实例之间互不影响，一般情况下你不需要修改此项。
+This [APlayer](https://github.com/MoePlayer/APlayer) are a bit different when saving the settings to `localStoragea`. Current implementation saves an array of objects 
+independently of each other between different instances, under normal circumstances you do not need to change this.
 
 ```js
-// 你可以使用实例的 `currentSettings` 属性获取当前实例的播放器设置
+// You can get the player settings for the current 
+// instance using the instance's `currentSettings` property.
 console.log(this.$refs.aplayer.currentSettings);
 ```
