@@ -5,8 +5,8 @@ sidebar: auto
 # Options
 
 ::: tip Info:
-Property names in HTML are case insensitive, so the browser interprets all uppercase characters as lowercase characters. 
-This means that when you use a template in the DOM, the prop name of camelCase (hump nomenclature) needs to be named using its equivalent kebab-case (short-lined naming). 
+Property names in HTML are case insensitive, so the browser interprets all uppercase characters as lowercase characters.
+This means that when you use a template in the DOM, the prop name of camelCase (hump nomenclature) needs to be named using its equivalent kebab-case (short-lined naming).
 If you use a string template, then this restriction does not apply.
 :::
 
@@ -119,13 +119,13 @@ declare namespace APlayer {
 }
 ```
 
-The differences between this [APlayer](https://github.com/MoePlayer/APlayer) and the current implentation are the extra props added  `id` and `speed`.
+The differences between this [APlayer](https://github.com/MoePlayer/APlayer) and the current implentation are the extra props added `id` and `speed`.
 `id` By default, generated automatically by the player, but you can also pass `id` value.  
 `speed` The property can specify the playback speed of the audio.
 
 ::: warning Note:
-`id` is a unique identifier used to distinguish audio. It is not allowed to repeat. If it is repeated, it may cause the player to missbehave.   
-By default, `id` is generated according to the index of the playlist audio files, and regenerates when the playlist change (add / delete).   
+`id` is a unique identifier used to distinguish audio. It is not allowed to repeat. If it is repeated, it may cause the player to missbehave.  
+By default, `id` is generated according to the index of the playlist audio files, and regenerates when the playlist change (add / delete).  
 When you delete the audio from a playlist, it will cause the current audio `id` to not match the playlist id after deletion.
 If you are using unique `url` values everithing will be ok.
 If there are duplicate `url` values，you have to set the audio `id` properties to ensure that each item is unique, otherwise the player exception may occur.
@@ -230,11 +230,11 @@ Since the player will save the user's usage habits, this option will be invalid 
 - **Default value**：`aplayer-setting`
 - **Description**：Set the `localStorage` key to store player settings
 
-This [APlayer](https://github.com/MoePlayer/APlayer) are a bit different when saving the settings to `localStoragea`. Current implementation saves an array of objects 
+This [APlayer](https://github.com/MoePlayer/APlayer) are a bit different when saving the settings to `localStoragea`. Current implementation saves an array of objects
 independently of each other between different instances, under normal circumstances you do not need to change this.
 
 ```js
-// You can get the player settings for the current 
+// You can get the player settings for the current
 // instance using the instance's `currentSettings` property.
 console.log(this.$refs.aplayer.currentSettings);
 ```
